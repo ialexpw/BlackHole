@@ -3,6 +3,8 @@
 	ini_set('display_startup_errors', '1');
 	error_reporting(E_ALL);
 
+	$genToken = substr(str_shuffle(MD5(microtime())), 0, 16);
+
 	// Check for a request
 	if(isset($_GET['rq']) && strlen($_GET['rq']) == 16 && ctype_alnum($_GET['rq'])) {
 		header('Access-Control-Allow-Origin: *');
@@ -68,9 +70,15 @@ Featured
 			$current = keepLines($current, 700);
 			file_put_contents($file, $current);
 			header("HTTP/1.1 200 OK");
-			echo "OK ?inspect";
+			echo '<a href="?rq=' . $_GET['rq'] . '&inspect">Inspect</a>';
 			exit();
 		}
+	}else{
+		$genLink = '<br /><a class="btn btn-info" href="https://mz.m0x.org/req/request.php?rq=' . $genToken . '" role="button">Generate Url</a>';
+
+		$getTpl = file_get_contents("req.tpl.html");
+		$getTpl = str_replace("CURRENT_HERE", $genLink, $getTpl);
+		echo $getTpl;
 	}
 
 	function movePage($num,$url){
