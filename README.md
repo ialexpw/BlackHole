@@ -1,4 +1,4 @@
-# RequestHole
+# BlackHole
 A simple Request Bin style script using a single PHP and HTML file. Requests are stored within txt files.
 
 1. Clone the repository
