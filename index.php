@@ -1,7 +1,14 @@
 <?php
-	//ini_set('display_errors', '1');
-	//ini_set('display_startup_errors', '1');
-	//error_reporting(E_ALL);
+	/**
+	 * index.php
+	 *
+	 * Main page for receiving and managing the requests
+	 *
+	 * @package    BlackHole
+	 * @author     Alex White
+	 * @copyright  2020 BlackHole
+	 * @link       https://m0x.org
+	 */
 
 	// Generate a token
 	$genToken = substr(str_shuffle(MD5(microtime())), 0, 16);
@@ -77,7 +84,6 @@
 
 				// Redirect back
 				header("Location: ?rq=" . $_GET['rq'] . "&inspect");
-				exit();
 			}
 		// Requesting
 		}else{
@@ -110,11 +116,15 @@
 			$newlog .= "</div></div>";
 			$current = $newlog . $current;
 			$current = keepLines($current, 700);
+
+			// Put the request into the file
 			file_put_contents($file, $current);
-			header("HTTP/1.1 200 OK");
-			exit();
+
+			// Return a 200
+			exit(http_response_code(200));
 		}
 	}else{
+		// Show the generate button if there is no current url
 		$genLink = '<br /><a class="btn btn-info" href="index.php?rq=' . $genToken . '&inspect" role="button">Generate Url</a>';
 
 		$getTpl = file_get_contents("req.tpl.html");
