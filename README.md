@@ -8,4 +8,4 @@ A simple Request Bin style script using a single PHP and HTML file. Requests are
 1. Refresh the page to see information about the requests
 
 ## Screenshot
-![alt text](https://mz.m0x.org/RequestShow.png "Example HTTP request")
+![alt text](https://req.m0x.org/ReqHole.png "Example HTTP request")
