@@ -35,10 +35,15 @@
 
 		// Are we inspecting the logs
 		if(isset($_GET['inspect'])) {
-			//No data yet
+			// No data yet
 			if(empty($current)) {
-				echo 'Request some data at the current url and refresh.';
+				// No data, show the Url
+				$getTpl = file_get_contents("req.tpl.html");
+				$getTpl = str_replace("REQ_URL", $urlTpl, $getTpl);
+				$getTpl = str_replace("CURRENT_HERE", "", $getTpl);
+				echo $getTpl;
 			}else{
+				// There is data, load the content
 				$getTpl = file_get_contents("req.tpl.html");
 				$getTpl = str_replace("REQ_URL", $urlTpl, $getTpl);
 				$getTpl = str_replace("CURRENT_HERE", $current, $getTpl);
