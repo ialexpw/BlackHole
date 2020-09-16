@@ -22,6 +22,17 @@
 		// Get the current contents of the file
 		$current = file_get_contents($file);
 
+		// Show the url
+		$reqUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+		$reqUrl = str_replace("&inspect", "", $reqUrl);
+
+		echo '<div class="input-group mb-3">';
+		echo '<div class="input-group-prepend">';
+		echo '<span class="input-group-text" id="inputGroup-sizing-default">Request URL</span>';
+		echo '</div>';
+		echo '<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="' . $reqUrl . '">';
+		echo '</div>';
+
 		// Are we inspecting the logs
 		if(isset($_GET['inspect'])) {
 			//No data yet
