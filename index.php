@@ -88,6 +88,7 @@
 		$genLink = '<br /><a class="btn btn-info" href="index.php?rq=' . $genToken . '" role="button">Generate Url</a>';
 
 		$getTpl = file_get_contents("req.tpl.html");
+		$getTpl = str_replace("REQ_URL", "", $getTpl);
 		$getTpl = str_replace("CURRENT_HERE", $genLink, $getTpl);
 		echo $getTpl;
 	}
