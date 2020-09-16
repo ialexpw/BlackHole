@@ -81,11 +81,11 @@
 			$current = keepLines($current, 700);
 			file_put_contents($file, $current);
 			header("HTTP/1.1 200 OK");
-			echo '<a href="?rq=' . $_GET['rq'] . '&inspect">Inspect</a>';
+			//echo '<a href="?rq=' . $_GET['rq'] . '&inspect">Inspect</a>';
 			exit();
 		}
 	}else{
-		$genLink = '<br /><a class="btn btn-info" href="index.php?rq=' . $genToken . '" role="button">Generate Url</a>';
+		$genLink = '<br /><a class="btn btn-info" href="index.php?rq=' . $genToken . '&inspect" role="button">Generate Url</a>';
 
 		$getTpl = file_get_contents("req.tpl.html");
 		$getTpl = str_replace("REQ_URL", "", $getTpl);
