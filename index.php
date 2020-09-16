@@ -15,6 +15,7 @@
 		// Name the file after the Url
 		$file = $query . ".txt";
 
+		// Create the file (if it does not exist)
 		if(!file_exists($file)) {
 			fclose(fopen($file, 'w'));
 		}
@@ -85,7 +86,7 @@
 			// Body
 			$newlog .= '<div class="col-md-6">';
 			$newlog .= '<h5>Body</h5>';
-			$newlog .= "<pre>" . $postdata . "</pre>";
+			$newlog .= "<pre>" . htmlspecialchars($postdata) . "</pre>";
 			$newlog .= "</div></div>";
 			$newlog .= "</div></div>";
 			$current = $newlog . $current;
