@@ -37,7 +37,7 @@
 		$reqUrl = str_replace("&inspect", "", $reqUrl);
 
 		$urlTpl = '<div class="row">';
-		$urlTpl .= '<div class="col-md-10">';
+		$urlTpl .= '<div class="col-md-11">';
 		$urlTpl .= '<div class="input-group mb-3">';
 		$urlTpl .= '<div class="input-group-prepend">';
 		$urlTpl .= '<span class="input-group-text" id="inputGroup-sizing-default">Request URL</span>';
@@ -47,7 +47,7 @@
 		$urlTpl .= '</div>';
 
 		// Button
-		$urlTpl .= '<div class="col-md-2">';
+		$urlTpl .= '<div class="col-md-1">';
 		$urlTpl .= '<a class="btn btn-info" href="index.php?rq=' . $genToken . '&clear" role="button">Clear</a>';
 		$urlTpl .= '</div>';
 
