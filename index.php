@@ -21,10 +21,11 @@
 
 			// Check that the file can be opened, otherwise return error
 			if($fop) {
+				// Close the file
 				fclose($fop);
 			}else{
-				http_response_code(500);
-				exit();
+				// Needs write access
+				exit(http_response_code(500));
 			}
 		}
 
