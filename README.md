@@ -7,4 +7,4 @@ A simple Request Bin style script in a single PHP file.
 1. Refresh the page to see information about the requests
 
 ## Screenshot
-![alt text](https://mz.m0x.org/Request.png "Example request")
+![alt text](https://mz.m0x.org/RequestShow.png "Example HTTP request")
