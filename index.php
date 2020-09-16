@@ -49,10 +49,17 @@
 				$getTpl = str_replace("CURRENT_HERE", $current, $getTpl);
 				echo $getTpl;
 			}
+		// Clearing the file
 		}else if(isset($_GET['clear'])) {
-			file_put_contents($file, "");
-			header("Location: ?rq=" . $_GET['rq'] . "&inspect");
-			exit();
+			// Clear file contents
+			if(file_exists($file)) {
+				file_put_contents($file, "");
+
+				// Redirect back
+				header("Location: ?rq=" . $_GET['rq'] . "&inspect");
+				exit();
+			}
+		// Requesting
 		}else{
 			$postdata = file_get_contents("php://input");
 
@@ -66,7 +73,6 @@
 			$newlog .= '<div class="row">';
 			$newlog .= '<div class="col-md-6">';
     
-			//$newlog .= "Query: ".$query . "<br />";
 			//$newlog .= "IP: ".$_SERVER['REMOTE_ADDR'] . "<br />";
 
 			// Header
@@ -86,7 +92,6 @@
 			$current = keepLines($current, 700);
 			file_put_contents($file, $current);
 			header("HTTP/1.1 200 OK");
-			//echo '<a href="?rq=' . $_GET['rq'] . '&inspect">Inspect</a>';
 			exit();
 		}
 	}else{
