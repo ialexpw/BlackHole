@@ -26,12 +26,12 @@
 		$reqUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 		$reqUrl = str_replace("&inspect", "", $reqUrl);
 
-		echo '<div class="input-group mb-3">';
-		echo '<div class="input-group-prepend">';
-		echo '<span class="input-group-text" id="inputGroup-sizing-default">Request URL</span>';
-		echo '</div>';
-		echo '<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="' . $reqUrl . '">';
-		echo '</div>';
+		$urlTpl = '<div class="input-group mb-3">';
+		$urlTpl .= '<div class="input-group-prepend">';
+		$urlTpl .= '<span class="input-group-text" id="inputGroup-sizing-default">Request URL</span>';
+		$urlTpl .= '</div>';
+		$urlTpl .= '<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="' . $reqUrl . '">';
+		$urlTpl .= '</div>';
 
 		// Are we inspecting the logs
 		if(isset($_GET['inspect'])) {
@@ -40,6 +40,7 @@
 				echo 'Request some data at the current url and refresh.';
 			}else{
 				$getTpl = file_get_contents("req.tpl.html");
+				$getTpl = str_replace("REQ_URL", $urlTpl, $getTpl);
 				$getTpl = str_replace("CURRENT_HERE", $current, $getTpl);
 				echo $getTpl;
 			}
