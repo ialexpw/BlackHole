@@ -36,11 +36,19 @@
 		$reqUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 		$reqUrl = str_replace("&inspect", "", $reqUrl);
 
-		$urlTpl = '<div class="input-group mb-3">';
+		$urlTpl = '<div class="row">';
+		$urlTpl .= '<div class="col-md-10">';
+		$urlTpl .= '<div class="input-group mb-3">';
 		$urlTpl .= '<div class="input-group-prepend">';
 		$urlTpl .= '<span class="input-group-text" id="inputGroup-sizing-default">Request URL</span>';
 		$urlTpl .= '</div>';
 		$urlTpl .= '<input type="text" class="form-control" onFocus="this.select();" value="' . $reqUrl . '" style="background-color: #fff;" readonly>';
+		$urlTpl .= '</div>';
+		$urlTpl .= '</div>';
+
+		// Button
+		$urlTpl .= '<div class="col-md-2">';
+		$urlTpl .= '<a class="btn btn-info" href="index.php?rq=' . $genToken . '&clear" role="button">Clear</a>';
 		$urlTpl .= '</div>';
 
 		// Are we inspecting the logs
