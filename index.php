@@ -48,7 +48,8 @@
 
 		// Button
 		$urlTpl .= '<div class="col-md-1">';
-		$urlTpl .= '<a class="btn btn-info" href="index.php?rq=' . $genToken . '&clear" role="button">Clear</a>';
+		$urlTpl .= '<a class="btn btn-info" href="index.php?rq=' . $_GET['rq'] . '&clear" role="button">Clear</a>';
+		$urlTpl .= '</div>';
 		$urlTpl .= '</div>';
 
 		// Are we inspecting the logs
