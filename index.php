@@ -3,6 +3,7 @@
 	//ini_set('display_startup_errors', '1');
 	//error_reporting(E_ALL);
 
+	// Generate a token
 	$genToken = substr(str_shuffle(MD5(microtime())), 0, 16);
 
 	// Check for a request
