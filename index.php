@@ -122,7 +122,8 @@
 
 			// Check for json
 			if($json) {
-				$newlog .= "<pre>" . htmlspecialchars(json_encode(json_decode($postdata), JSON_PRETTY_PRINT)) . "</pre>";
+				$postdata = json_encode(json_decode($postdata), JSON_PRETTY_PRINT);
+				$newlog .= "" . $postdata . "";
 			}else{
 				$newlog .= "<pre>" . htmlspecialchars($postdata) . "</pre>";
 			}
