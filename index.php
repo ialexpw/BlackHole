@@ -101,9 +101,17 @@
     
 			//$newlog .= "IP: ".$_SERVER['REMOTE_ADDR'] . "<br />";
 
-			// Header
+			// Headers
 			$newlog .= '<h5>Headers</h5>';
 			foreach (getallheaders() as $name => $value) {
+				// Check for json content type
+				if($name == "Content-Type" && $value == "application/json") {
+					$json = 1;
+				}else{
+					$json = 0;
+				}
+
+				// List headers
 				$newlog .= "<b>$name</b>: $value<br />";
 			}
 			$newlog .= '</div>';
@@ -111,7 +119,14 @@
 			// Body
 			$newlog .= '<div class="col-md-6">';
 			$newlog .= '<h5>Body</h5>';
-			$newlog .= "<pre>" . htmlspecialchars($postdata) . "</pre>";
+
+			// Check for json
+			if($json) {
+				$newlog .= "<pre>" . htmlspecialchars(json_encode(json_decode($postdata), JSON_PRETTY_PRINT)) . "</pre>";
+			}else{
+				$newlog .= "<pre>" . htmlspecialchars($postdata) . "</pre>";
+			}
+			
 			$newlog .= "</div></div>";
 			$newlog .= "</div></div>";
 			$current = $newlog . $current;
