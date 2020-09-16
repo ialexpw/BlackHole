@@ -1,6 +1,12 @@
 # BlackHole
-A simple Request Bin style script using a single PHP and HTML file. Requests are stored within txt files.
+A simple Request Bin style application that allows you to capture, debug and inspect HTTP requests in a human-readable way. It is especially helpful when creating an application API or developing Webhooks.
 
+BlackHole allows you to capture GET, POST, PUT, PATCH, DELETE and more HTTP requests.
+
+## Requirements
+BlackHole is lightweight and can be setup within minutes, the only requirements are a webserver and PHP. Both Apache and nginx work without issue and PHP 7+ is recommended. No database is required.
+
+## Installation
 1. Clone the repository
 1. Ensure the directory has write access
 1. Click to generate a random url
@@ -9,3 +15,10 @@ A simple Request Bin style script using a single PHP and HTML file. Requests are
 
 ## Screenshot
 ![alt text](https://req.m0x.org/ReqHole.png "Example HTTP request")
+
+## Development
+- [ ] Auto refresh the requests coming in
+- [ ] An API to view details about bins/holes
+- [ ] An API to allow you to create/delete bins/holes
+- [ ] Ability to export data that is within a bin/hole
+- [ ] Make it easier to change the HTML template if needed
