@@ -85,7 +85,7 @@
 			exit();
 		}
 	}else{
-		$genLink = '<br /><a class="btn btn-info" href="request.php?rq=' . $genToken . '" role="button">Generate Url</a>';
+		$genLink = '<br /><a class="btn btn-info" href="index.php?rq=' . $genToken . '" role="button">Generate Url</a>';
 
 		$getTpl = file_get_contents("req.tpl.html");
 		$getTpl = str_replace("CURRENT_HERE", $genLink, $getTpl);
