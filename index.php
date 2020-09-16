@@ -11,7 +11,7 @@
 	 */
 
 	// Generate a token
-	$genToken = substr(str_shuffle(MD5(microtime())), 0, 16);
+	$genToken = substr(str_shuffle(md5(microtime())), 0, 16);
 
 	// Check for a request
 	if(isset($_GET['rq']) && strlen($_GET['rq']) == 16 && ctype_alnum($_GET['rq'])) {
