@@ -30,7 +30,7 @@
 		$urlTpl .= '<div class="input-group-prepend">';
 		$urlTpl .= '<span class="input-group-text" id="inputGroup-sizing-default">Request URL</span>';
 		$urlTpl .= '</div>';
-		$urlTpl .= '<input type="text" class="form-control" onFocus="this.select();" value="' . $reqUrl . '" readonly>';
+		$urlTpl .= '<input type="text" class="form-control" onFocus="this.select();" value="' . $reqUrl . '" style="background-color: #fff;" readonly>';
 		$urlTpl .= '</div>';
 
 		// Are we inspecting the logs
