@@ -37,20 +37,54 @@
 			header("Location: ?rq=" . $_GET['rq'] . "&inspect");
 			exit();
 		}else{
-			// Save the incoming data
-/* temp
-<div class="card" style="width: 18rem;">
-<div class="card-header">
-Featured
-</div>
-<ul class="list-group list-group-flush">
-<li class="list-group-item">Cras justo odio</li>
-<li class="list-group-item">Dapibus ac facilisis in</li>
-<li class="list-group-item">Vestibulum at eros</li>
-</ul>
-</div>
-*/
 			$postdata = file_get_contents("php://input");
+
+			// Header
+			$newlog = '<br /><div class="card"><h5 class="card-header">';
+			$newlog .= $_SERVER["REQUEST_METHOD"] . ' ' . $_SERVER['REQUEST_URI'] . '<span class="float-right">' . date('Y-m-d H:i:s') . '</span>';
+			$newlog .= '</h5>';
+
+			// Body
+			$newlog .= '<div class="card-body">';
+			$newlog .= "Datetime: ".date('Y-m-d H:i:s') . "<br />";
+			$newlog .= "Query: ".$query . "<br />";
+			$newlog .= "IP: ".$_SERVER['REMOTE_ADDR'] . "<br />";
+			$newlog .= "URI: ".$_SERVER['REQUEST_URI'] . "<br />";
+			$newlog .= "Method: ".$_SERVER["REQUEST_METHOD"] . "<br />";
+			// Header
+			//$newlog .= '<hr><span class="badge badge-info">HEADER</span><br />';
+			foreach (getallheaders() as $name => $value) {
+				$newlog .= "$name: $value<br />";
+			}
+			// Body
+			//$newlog .= '<hr><span class="badge badge-info">BODY</span><br />';
+			$newlog .= "<pre>" . $postdata . "</pre>";
+			$newlog .= "</div></div>";
+			$current = $newlog . $current;
+			$current = keepLines($current, 700);
+			file_put_contents($file, $current);
+			header("HTTP/1.1 200 OK");
+			echo '<a href="?rq=' . $_GET['rq'] . '&inspect">Inspect</a>';
+			exit();
+?>
+<!--
+
+  <div class="card">
+  <h5 class="card-header">Featured</h5>
+  <div class="card-body">
+    <h5 class="card-title">Special title treatment</h5>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+
+-->
+<?php
+
+
+
+			// Save the incoming data
+			/*$postdata = file_get_contents("php://input");
 			$newlog = '<br /><div class="card"><div class="card-body">';
 			$newlog .= "Datetime: ".date('Y-m-d H:i:s') . "<br />";
 			$newlog .= "Query: ".$query . "<br />";
@@ -71,7 +105,7 @@ Featured
 			file_put_contents($file, $current);
 			header("HTTP/1.1 200 OK");
 			echo '<a href="?rq=' . $_GET['rq'] . '&inspect">Inspect</a>';
-			exit();
+			exit();*/
 		}
 	}else{
 		$genLink = '<br /><a class="btn btn-info" href="https://mz.m0x.org/req/request.php?rq=' . $genToken . '" role="button">Generate Url</a>';
