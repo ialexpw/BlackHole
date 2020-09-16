@@ -17,7 +17,14 @@
 
 		// Create the file (if it does not exist)
 		if(!file_exists($file)) {
-			fclose(fopen($file, 'w'));
+			$fop = fopen($file, 'w');
+
+			// Check that the file can be opened, otherwise return error
+			if($fop) {
+				fclose($fop);
+			}else{
+				http_response_code(500);
+			}
 		}
 
 		// Get the current contents of the file
