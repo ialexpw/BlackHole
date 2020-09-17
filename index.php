@@ -89,6 +89,10 @@
 		}else{
 			$postdata = file_get_contents("php://input");
 
+			if(empty($postdata)) {
+				$postdata = $_POST[0];
+			}
+
 			// Header
 			$newlog = '<br /><div class="card"><h5 class="card-header">';
 			$newlog .= $_SERVER["REQUEST_METHOD"] . ' ' . $_SERVER['REQUEST_URI'] . '<span class="float-right">' . date('Y-m-d H:i:s') . '</span>';
