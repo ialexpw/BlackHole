@@ -13,6 +13,27 @@
 	// Generate a token
 	$genToken = substr(str_shuffle(md5(microtime())), 0, 16);
 
+	// API area
+	if(isset($_GET['api'] && !empty($_GET['api'])) {
+		// Create a bin
+		if(strtolower($_GET['api']) == 'create') {
+			// Save the url
+			$url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]?rq=" . $genToken;
+
+			// Arrange the array
+			$jsArr = array(
+				"id" => $genToken,
+				"link" => $url
+			);
+
+			header("Content-Type: application/json; charset=utf-8");
+			echo json_encode($jsArr);
+			exit();
+		}
+	}
+
+	
+
 	// Check for a request
 	if(isset($_GET['rq']) && strlen($_GET['rq']) == 16 && ctype_alnum($_GET['rq'])) {
 		header('Access-Control-Allow-Origin: *');
