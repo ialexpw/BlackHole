@@ -90,7 +90,7 @@
 			$postdata = file_get_contents("php://input");
 
 			if(empty($postdata)) {
-				$postdata = $_POST[0];
+				print_r($_POST[0]);
 			}
 
 			// Header
