@@ -115,7 +115,7 @@
 			// Body
 			$newlog .= '<div class="col-md-6">';
 			$newlog .= '<h5>Body</h5>';
-			$newlog .= "<pre>" . htmlspecialchars($postdata) . "</pre>";
+			$newlog .= "<pre>" . print_r($postdata) . "</pre>";
 			$newlog .= "</div></div>";
 			$newlog .= "</div></div>";
 			$current = $newlog . $current;
