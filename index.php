@@ -89,10 +89,6 @@
 		}else{
 			$postdata = file_get_contents("php://input");
 
-			if(empty($postdata)) {
-				$postdata = $_POST;
-			}
-
 			// Header
 			$newlog = '<br /><div class="card"><h5 class="card-header">';
 			$newlog .= $_SERVER["REQUEST_METHOD"] . ' ' . $_SERVER['REQUEST_URI'] . '<span class="float-right">' . date('Y-m-d H:i:s') . '</span>';
@@ -115,7 +111,7 @@
 			// Body
 			$newlog .= '<div class="col-md-6">';
 			$newlog .= '<h5>Body</h5>';
-			$newlog .= "<pre>" . print_r($_POST) . "</pre>";
+			$newlog .= "<pre>" . htmlspecialchars($postdata) . "</pre>";
 			$newlog .= "</div></div>";
 			$newlog .= "</div></div>";
 			$current = $newlog . $current;
