@@ -87,7 +87,6 @@
 			}
 		// Requesting
 		}else{
-			print_r($_POST);
 			$postdata = file_get_contents("php://input");
 
 			// Header
