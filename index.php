@@ -18,7 +18,7 @@
 		// Create a bin
 		if(strtolower($_GET['api']) == 'create') {
 			// Save the url
-			$url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]?rq=" . $genToken;
+			$url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER['HTTP_HOST']?rq=" . $genToken . '&inspect';
 
 			// Arrange the array
 			$jsArr = array(
