@@ -33,12 +33,16 @@
 
 		// Get details on a bin
 		if(isset($_GET['details']) && !empty($_GET['details'])) {
+			echo 'a';
 			// Validate the id
 			if(strlen($_GET['details']) == 16 && ctype_alnum($_GET['details'])) {
+				echo 'b';
 				// Check the file is still available
 				if(file_exists($_GET['details'] . '.txt')) {
+					echo 'c';
 					// Viewing the raw details
 					if(isset($_GET['raw'])) {
+						echo 'd';
 						echo file_get_contents($_GET['raw'] . '.txt');
 						exit();
 					}else{
