@@ -39,16 +39,16 @@
 				if(file_exists($_GET['details'] . '.txt')) {
 					// Viewing the raw details
 					if(isset($_GET['raw'])) {
-						echo file_get_contents($_GET['raw']);
+						echo file_get_contents($_GET['raw'] . '.txt');
 						exit();
 					}else{
-						exit(3);
+						exit("3");
 					}
 				}else{
-					exit(2);
+					exit("2");
 				}
 			}else{
-				exit(1);
+				exit("1");
 			}
 		}
 	}
