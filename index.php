@@ -16,7 +16,7 @@
 	// API area
 	if(isset($_GET['api'])) {
 		// Create a bin
-		if(isset($_GET['api']) && isset($_GET['create'])) {
+		if(isset($_GET['create'])) {
 			// Save the url
 			$url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . '://' . $_SERVER['HTTP_HOST'] . '?rq=' . $genToken . '&inspect';
 
@@ -32,7 +32,7 @@
 		}
 
 		// Get details on a bin
-		if(isset($_GET['api']) && !empty($_GET['details'])) {
+		if(isset($_GET['details']) && !empty($_GET['details'])) {
 			// Validate the id
 			if(strlen($_GET['details']) == 16 && ctype_alnum($_GET['details'])) {
 				// Check the file is still available
@@ -41,8 +41,14 @@
 					if(isset($_GET['raw'])) {
 						echo file_get_contents($_GET['raw']);
 						exit();
+					}else{
+						exit(3);
 					}
+				}else{
+					exit(2);
 				}
+			}else{
+				exit(1);
 			}
 		}
 	}
