@@ -40,6 +40,7 @@
 					// Viewing the raw details
 					if(isset($_GET['raw'])) {
 						echo file_get_contents($_GET['raw']);
+						exit();
 					}
 				}
 			}
