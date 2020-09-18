@@ -40,7 +40,7 @@
 					// Viewing the raw details
 					if(isset($_GET['raw'])) {
 						// Print the details
-						exit(htmlspecialchars(file_get_contents($_GET['details'] . '.txt')));
+						exit(strip_tags(htmlspecialchars(file_get_contents($_GET['details'] . '.txt'))));
 					}
 				}
 			}
