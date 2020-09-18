@@ -20,16 +20,24 @@
 			// Check the file is still available
 			if(file_exists($_GET['export'] . '.txt')) {
 				// Store filename
-				$fnme = $_GET['export'] . '.txt';
+				//$fnme = $_GET['export'] . '.txt';
+				$fcont = strip_tags(file_get_contents($_GET['export'] . '.txt'));
 
 				// Download
-				header('Content-Type: application/octet-stream');
+				/*header('Content-Type: application/octet-stream');
 				header('Content-Disposition: attachment; filename='.basename($fnme));
 				header('Expires: 0');
 				header('Cache-Control: must-revalidate');
 				header('Pragma: public');
 				header('Content-Length: ' . filesize($fnme));
-				readfile($fnme);
+				readfile($fnme);*/
+
+				header("Content-type: application/csv");
+				header("Content-Disposition: attachment; filename='output.csv'");
+				header("Pragma: no-cache");
+				header("Expires: 0");
+
+				echo $fcont;
 				exit;
 			}
 		}
