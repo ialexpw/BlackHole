@@ -82,7 +82,7 @@
 		$reqUrl = str_replace("&inspect", "", $reqUrl);
 
 		$urlTpl = '<div class="row">';
-		$urlTpl .= '<div class="col-md-11">';
+		$urlTpl .= '<div class="col-md-10">';
 		$urlTpl .= '<div class="input-group mb-3">';
 		$urlTpl .= '<div class="input-group-prepend">';
 		$urlTpl .= '<span class="input-group-text" id="inputGroup-sizing-default">Request URL</span>';
@@ -92,10 +92,10 @@
 		$urlTpl .= '</div>';
 
 		// Button
-		$urlTpl .= '<div class="col-md-1">';
+		$urlTpl .= '<div class="col-md-2">';
 		$urlTpl .= '<a class="btn btn-light" href="index.php?rq=' . $_GET['rq'] . '&clear" role="button">Clear</a>';
 		$urlTpl .= '</div>';
-		$urlTpl .= '<img src="export.png" />';
+		$urlTpl .= '<img height="46" src="export.png" />';
 		$urlTpl .= '</div>';
 
 		// Are we inspecting the logs
