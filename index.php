@@ -16,7 +16,7 @@
 	// API area
 	if(isset($_GET['api']) && !empty($_GET['api'])) {
 		// Create a bin
-		if(strtolower($_GET['api']) == 'create') {
+		if(isset($_GET['api']) && isset($_GET['create'])) {
 			// Save the url
 			$url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . '://' . $_SERVER['HTTP_HOST'] . '?rq=' . $genToken . '&inspect';
 
@@ -30,9 +30,21 @@
 			echo json_encode($jsArr);
 			exit();
 		}
-	}
 
-	
+		// Get details on a bin
+		if(isset($_GET['api']) && !empty($_GET['details'])) {
+			// Validate the id
+			if(strlen($_GET['api']) == 16 && ctype_alnum($_GET['api'])) {
+				// Check the file is still available
+				if(file_exists($_GET['api'] . '.txt')) {
+					// Viewing the raw details
+					if(isset($_GET['raw'])) {
+						echo file_get_contents($_GET['raw']);
+					}
+				}
+			}
+		}
+	}
 
 	// Check for a request
 	if(isset($_GET['rq']) && strlen($_GET['rq']) == 16 && ctype_alnum($_GET['rq'])) {
