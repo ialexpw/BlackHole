@@ -32,11 +32,10 @@
 				header('Content-Length: ' . filesize($fnme));
 				readfile($fnme);*/
 
-				header("Content-type: application/csv");
-				header("Content-Disposition: attachment; filename='output.csv'");
-				header("Pragma: no-cache");
-				header("Expires: 0");
-
+				header('Content-Type: application/octet-stream');
+				header('Content-Disposition: attachment; filename='.basename($fnme));
+				header('Expires: 0');
+				header('Cache-Control: must-revalidate');
 				echo $fcont;
 				exit;
 			}
