@@ -14,7 +14,7 @@
 	$genToken = substr(str_shuffle(md5(microtime())), 0, 16);
 
 	// API area
-	if(isset($_GET['api']) && !empty($_GET['api'])) {
+	if(isset($_GET['api'])) {
 		// Create a bin
 		if(isset($_GET['api']) && isset($_GET['create'])) {
 			// Save the url
