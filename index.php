@@ -39,11 +39,11 @@
 				if(file_exists($_GET['details'] . '.txt')) {
 					// Viewing the raw details
 					if(isset($_GET['raw'])) {
-						// Print the details (stripping tags)
-						exit(strip_tags(file_get_contents($_GET['details'] . '.txt')));
-					}else{
 						// Print the details (with tags)
 						exit(htmlspecialchars(file_get_contents($_GET['details'] . '.txt')));
+					}else{
+						// Print the details (stripping tags)
+						exit(strip_tags(file_get_contents($_GET['details'] . '.txt')));
 					}
 				}
 			}
