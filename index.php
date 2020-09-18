@@ -34,9 +34,9 @@
 		// Get details on a bin
 		if(isset($_GET['api']) && !empty($_GET['details'])) {
 			// Validate the id
-			if(strlen($_GET['api']) == 16 && ctype_alnum($_GET['api'])) {
+			if(strlen($_GET['details']) == 16 && ctype_alnum($_GET['details'])) {
 				// Check the file is still available
-				if(file_exists($_GET['api'] . '.txt')) {
+				if(file_exists($_GET['details'] . '.txt')) {
 					// Viewing the raw details
 					if(isset($_GET['raw'])) {
 						echo file_get_contents($_GET['raw']);
