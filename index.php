@@ -93,8 +93,8 @@
 
 		// Button
 		$urlTpl .= '<div class="col-md-2">';
-		$urlTpl .= '<a class="btn btn-light" href="index.php?rq=' . $_GET['rq'] . '&clear" role="button">Clear</a>';
 		$urlTpl .= '<img height="32" src="export.png" />';
+		$urlTpl .= '<a class="btn btn-light" href="index.php?rq=' . $_GET['rq'] . '&clear" style="margin-left:10px;" role="button">Clear Log</a>';
 		$urlTpl .= '</div>';
 		$urlTpl .= '</div>';
 
