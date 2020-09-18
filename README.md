@@ -20,5 +20,5 @@ BlackHole is lightweight and can be setup within minutes, the only requirements 
 - [ ] Auto refresh the requests coming in
 - [x] An API to view details about bins/holes
 - [x] An API to allow you to create bins/holes
-- [ ] Ability to export data that is within a bin/hole
+- [x] Ability to export data that is within a bin/hole
 - [ ] Make it easier to change the HTML template if needed

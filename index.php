@@ -13,6 +13,28 @@
 	// Generate a token
 	$genToken = substr(str_shuffle(md5(microtime())), 0, 16);
 
+	// Export data
+	if(isset($_GET['export']) && !empty($_GET['export'])) {
+		// Validate the id
+		if(strlen($_GET['export']) == 16 && ctype_alnum($_GET['export'])) {
+			// Check the file is still available
+			if(file_exists($_GET['export'] . '.txt')) {
+				// Store filename
+				$fnme = $_GET['export'] . '.txt';
+
+				// Download
+				header('Content-Type: application/octet-stream');
+				header('Content-Disposition: attachment; filename='.basename($fnme));
+				header('Expires: 0');
+				header('Cache-Control: must-revalidate');
+				header('Pragma: public');
+				header('Content-Length: ' . filesize($fnme));
+				readfile($fnme);
+				exit;
+			}
+		}
+	}
+
 	// API area
 	if(isset($_GET['api'])) {
 		// Create a bin
