@@ -39,7 +39,7 @@
 				if(file_exists($_GET['details'] . '.txt')) {
 					// Viewing the raw details
 					if(isset($_GET['raw'])) {
-						//echo ;
+						// Print the details
 						exit(htmlspecialchars(file_get_contents($_GET['details'] . '.txt')));
 					}
 				}
