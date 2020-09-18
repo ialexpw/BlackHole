@@ -95,6 +95,7 @@
 		$urlTpl .= '<div class="col-md-1">';
 		$urlTpl .= '<a class="btn btn-light" href="index.php?rq=' . $_GET['rq'] . '&clear" role="button">Clear</a>';
 		$urlTpl .= '</div>';
+		$urlTpl .= '<img src="export.png" />';
 		$urlTpl .= '</div>';
 
 		// Are we inspecting the logs
