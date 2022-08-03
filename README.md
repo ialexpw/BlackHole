@@ -17,7 +17,7 @@ BlackHole is lightweight and can be setup within minutes, the only requirements 
 ![alt text](https://req.m0x.org/ReqHole.png "Example HTTP request")
 
 ## Development
-- [ ] Auto refresh the requests coming in
+- [x] Auto refresh the requests coming in
 - [x] An API to view details about bins/holes
 - [x] An API to allow you to create bins/holes
 - [x] Ability to export data that is within a bin/hole
