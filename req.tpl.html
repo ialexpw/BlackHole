@@ -1,22 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-		<meta http-equiv="refresh" content="10">
-		<title>BlackHole</title>
 
-		<!-- Stylesheet -->
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	</head>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>BlackHole | TEMPLATE_TITLE_CONTENT</title>
 
-	<body>
-		<div class="container">
-			<br />
-			REQ_URL
-			CURRENT_HERE
-			<br />
-		</div>
-	</body>
+	<!-- Stylesheet -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+	<!-- Refresh Frequency Dropdown - Associated JS -->
+	<script>
+		function getSelectValue(selectID) {
+			pick_ = document.getElementById('selectX').value;
+			localStorage.setItem("lastSelectedValue", pick_);
+			location.reload();
+		}
+		function getLastSelectedValue() {
+			var value = localStorage.getItem("lastSelectedValue")
+			if (value) {
+				document.getElementById('selectX').value = value;
+			}
+
+			let refresh_period_sec = document.getElementById('selectX').value;
+			refresh_period_sec = refresh_period_sec.slice(0, refresh_period_sec.indexOf(" "));
+
+			if (refresh_period_sec > 0) {
+				setTimeout(() => window.location.reload(), refresh_period_sec * 1000);
+			}
+		}
+	</script>
+
+
+</head>
+
+<body onload='getLastSelectedValue()'>
+	<div class="container">
+
+		<br />
+		REQ_URL
+		CURRENT_HERE
+		<br />
+	</div>
+</body>
+
 </html>

@@ -75,7 +75,7 @@
 					}else{
 						// Print the details (stripping tags)
 						header("Content-Type: text/plain; charset=utf-8");
-						exit(strip_tags(file_get_contents($output_folder . $_GET['details'] . '.txt')));
+						exit(htmlspecialchars_decode(strip_tags(file_get_contents($output_folder . $_GET['details'] . '.txt'))));
 					}
 				}
 			}
@@ -118,32 +118,44 @@
 		$urlTpl = '<div class="row">';
 
 		// Home Button
-		$urlTpl .= '<div class="col-md-1">';
+		$urlTpl .= '<div class="mx-2">';
 		$urlTpl .= '<a class="btn btn-success" href="/" role="button">Home</a>';
 		$urlTpl .= '</div>';
 
 		// Request URL Button/Field section
-		$urlTpl .= '<div class="col-md-7">';
+		$urlTpl .= '<div class="mx-2">';
 		$urlTpl .= '<div class="input-group mb-3">';
 		$urlTpl .= '<div class="input-group-prepend">';
-		$urlTpl .= '<span class="input-group-text" id="inputGroup-sizing-default">Request URL</span>';
+		$urlTpl .= '<span class="input-group-text" id="inputGroup-sizing-default">Req. URL</span>';
 		$urlTpl .= '</div>';
 		$urlTpl .= '<input type="text" class="form-control" onFocus="this.select();" value="' . $reqUrl . '" style="background-color: #fff;" readonly>';
 		$urlTpl .= '</div>';
 		$urlTpl .= '</div>';
 
+		// Refresh Rate
+		$urlTpl .= '<div class="mx-2">';
+		$urlTpl .= '<div class="input-group mb-3">';
+		$urlTpl .= '<div class="input-group-prepend">';
+		$urlTpl .= '<span class="input-group-text" id="inputGroup-sizing-default">🔃</span>';
+		$urlTpl .= '</div>';
+		$urlTpl .= '<select class="form-control"  id="selectX" onchange="getSelectValue(\'selectX\');">';
+		$urlTpl .= '<option>0 - Disable</option> <option>2 seconds</option> <option>10 seconds</option> <option>20 seconds</option> <option>60 seconds</option> <option>120 seconds</option>';
+		$urlTpl .= '</select>';
+		$urlTpl .= '</div>';
+		$urlTpl .= '</div>';
+
 		// View API
-		$urlTpl .= '<div class="col-md-1">';
-		$urlTpl .= '<a class="btn btn-secondary" href="index.php?api&details=' . $_GET['rq'] . '" role="button" target="_blank" title="View Results API">API</a>';
+		$urlTpl .= '<div class="mx-2">';
+		$urlTpl .= '<a class="btn btn-secondary" href="index.php?api&details=' . $_GET['rq'] . '" role="button" target="_blank" title="View Results API">View Results API</a>';
 		$urlTpl .= '</div>';
 
 		// Export Data Button
-		$urlTpl .= '<div class="col-md-1 text-center">';
-		$urlTpl .= '<a href="?export=' . $_GET['rq'] . '"><img height="32" width="32" src="export.png" alt="Export Data" title="Export Data" /></a>';
+		$urlTpl .= '<div class="mx-2">';
+		$urlTpl .= '<a class="btn btn-secondary" href="?export=' . $_GET['rq'] . '" role="button">Export Data</a>';
 		$urlTpl .= '</div>';
 
 		// Clear Log Button
-		$urlTpl .= '<div class="col-md-2">';
+		$urlTpl .= '<div class="mx-2">';
 		$urlTpl .= '<a class="btn btn-warning" href="index.php?rq=' . $_GET['rq'] . '&clear" role="button">Clear Log</a>';
 		$urlTpl .= '</div>';
 		
@@ -153,16 +165,18 @@
 		if(isset($_GET['inspect'])) {
 			// No data yet
 			if(empty($current)) {
-				// No data, show the Url
+				// No data, show the URL
 				$getTpl = file_get_contents("req.tpl.html");
 				$getTpl = str_replace("REQ_URL", $urlTpl, $getTpl);
 				$getTpl = str_replace("CURRENT_HERE", "", $getTpl);
+				$getTpl = str_replace("TEMPLATE_TITLE_CONTENT", "🔎 " . $_GET['rq'], $getTpl);
 				echo $getTpl;
 			}else{
 				// There is data, load the content
 				$getTpl = file_get_contents("req.tpl.html");
 				$getTpl = str_replace("REQ_URL", $urlTpl, $getTpl);
 				$getTpl = str_replace("CURRENT_HERE", $current, $getTpl);
+				$getTpl = str_replace("TEMPLATE_TITLE_CONTENT", "🔎 " . $_GET['rq'], $getTpl);
 				echo $getTpl;
 			}
 		// Clearing the file
@@ -201,7 +215,7 @@
 			// Body
 			$newlog .= '<div class="col-md-6">';
 			$newlog .= '<h5>Body</h5>' . $nl;
-			$newlog .= "<pre>" . htmlspecialchars($postdata) . "</pre>" . $nl;
+			$newlog .= "<pre>" . htmlspecialchars($postdata) . "</pre>" . $nl . $nl;
 			$newlog .= "</div></div>";
 			$newlog .= "</div></div>";
 			$current = $newlog . $current;
@@ -219,12 +233,15 @@
 			exit(http_response_code(200));
 		}
 	}else{
+		// Generate Home Page
+
 		// Show the generate button if there is no current url
 		$genLink = '<br /><a class="btn btn-info" href="index.php?rq=' . $genToken . '&inspect" role="button">Generate URL</a>';
 
 		$getTpl = file_get_contents("req.tpl.html");
 		$getTpl = str_replace("REQ_URL", "", $getTpl);
 		$getTpl = str_replace("CURRENT_HERE", $genLink, $getTpl);
+		$getTpl = str_replace("TEMPLATE_TITLE_CONTENT", "Home", $getTpl);
 		echo $getTpl;
 	}
 
