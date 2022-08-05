@@ -14,7 +14,7 @@ BlackHole is lightweight and can be setup within minutes, the only requirements 
 1. Refresh the page to see information about the requests
 
 ## Screenshot
-![alt text](https://req.m0x.org/ReqHole.png "Example HTTP request")
+![image](https://user-images.githubusercontent.com/7994724/183115278-518653c4-5336-4c24-853e-95dab4b6321d.png)
 
 ## Development
 - [ ] Auto refresh the requests coming in
