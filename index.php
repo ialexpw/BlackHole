@@ -10,20 +10,28 @@
 	 * @link       https://m0x.org
 	 */
 
+	// Set the log output folder
+	$output_folder = 'log/';
+
 	// Generate a token
 	$genToken = substr(str_shuffle(md5(microtime())), 0, 16);
+
+	// Make the $output_folder, if it doesn't exist already
+	if (!file_exists($output_folder)) {
+		mkdir($output_folder, 0777, true);
+	}
 
 	// Export data
 	if(isset($_GET['export']) && !empty($_GET['export'])) {
 		// Validate the id
 		if(strlen($_GET['export']) == 16 && ctype_alnum($_GET['export'])) {
 			// Check the file is still available
-			if(file_exists($_GET['export'] . '.txt')) {
+			if(file_exists($output_folder . $_GET['export'] . '.txt')) {
 				// Store filename
-				$fnme = $_GET['export'] . '.txt';
+				$fnme = $output_folder . $_GET['export'] . '.txt';
 
 				// Contents of file (without tags)
-				$fcont = strip_tags(file_get_contents($_GET['export'] . '.txt'));
+				$fcont = strip_tags(file_get_contents($output_folder . $_GET['export'] . '.txt'));
 
 				// Download
 				header('Content-Type: application/octet-stream');
@@ -59,14 +67,15 @@
 			// Validate the id
 			if(strlen($_GET['details']) == 16 && ctype_alnum($_GET['details'])) {
 				// Check the file is still available
-				if(file_exists($_GET['details'] . '.txt')) {
+				if(file_exists($output_folder . $_GET['details'] . '.txt')) {
 					// Viewing the raw details
 					if(isset($_GET['raw'])) {
 						// Print the details (with tags)
-						exit(htmlspecialchars(file_get_contents($_GET['details'] . '.txt')));
+						exit(htmlspecialchars(file_get_contents($output_folder . $_GET['details'] . '.txt')));
 					}else{
 						// Print the details (stripping tags)
-						exit(strip_tags(file_get_contents($_GET['details'] . '.txt')));
+						header("Content-Type: text/plain; charset=utf-8");
+						exit(htmlspecialchars_decode(strip_tags(file_get_contents($output_folder . $_GET['details'] . '.txt'))));
 					}
 				}
 			}
@@ -81,7 +90,9 @@
 		$query = $_GET['rq'];
 
 		// Name the file after the Url
-		$file = $query . ".txt";
+		$file = $output_folder . $query . ".txt";
+
+		$file_body = $output_folder . $query . "_body_" . (new DateTime())->format('Y-m-d-His.u') . ".txt";
 
 		// Create the file (if it does not exist)
 		if(!file_exists($file)) {
@@ -105,36 +116,67 @@
 		$reqUrl = str_replace("&inspect", "", $reqUrl);
 
 		$urlTpl = '<div class="row">';
-		$urlTpl .= '<div class="col-md-10">';
+
+		// Home Button
+		$urlTpl .= '<div class="mx-2">';
+		$urlTpl .= '<a class="btn btn-success" href="/" role="button">Home</a>';
+		$urlTpl .= '</div>';
+
+		// Request URL Button/Field section
+		$urlTpl .= '<div class="mx-2">';
 		$urlTpl .= '<div class="input-group mb-3">';
 		$urlTpl .= '<div class="input-group-prepend">';
-		$urlTpl .= '<span class="input-group-text" id="inputGroup-sizing-default">Request URL</span>';
+		$urlTpl .= '<span class="input-group-text" id="inputGroup-sizing-default">Req. URL</span>';
 		$urlTpl .= '</div>';
 		$urlTpl .= '<input type="text" class="form-control" onFocus="this.select();" value="' . $reqUrl . '" style="background-color: #fff;" readonly>';
 		$urlTpl .= '</div>';
 		$urlTpl .= '</div>';
 
-		// Button
-		$urlTpl .= '<div class="col-md-2">';
-		$urlTpl .= '<a href="?export=' . $_GET['rq'] . '"><img height="32" src="export.png" alt="Export Data" /></a>';
-		$urlTpl .= '<a class="btn btn-light" href="index.php?rq=' . $_GET['rq'] . '&clear" style="margin-left:26px;" role="button">Clear Log</a>';
+		// Refresh Rate
+		$urlTpl .= '<div class="mx-2">';
+		$urlTpl .= '<div class="input-group mb-3">';
+		$urlTpl .= '<div class="input-group-prepend">';
+		$urlTpl .= '<span class="input-group-text" id="inputGroup-sizing-default">🔃</span>';
 		$urlTpl .= '</div>';
+		$urlTpl .= '<select class="form-control"  id="selectX" onchange="getSelectValue(\'selectX\');">';
+		$urlTpl .= '<option>0 - Disable</option> <option>2 seconds</option> <option>10 seconds</option> <option>20 seconds</option> <option>60 seconds</option> <option>120 seconds</option>';
+		$urlTpl .= '</select>';
+		$urlTpl .= '</div>';
+		$urlTpl .= '</div>';
+
+		// View API
+		$urlTpl .= '<div class="mx-2">';
+		$urlTpl .= '<a class="btn btn-secondary" href="index.php?api&details=' . $_GET['rq'] . '" role="button" target="_blank" title="View Results API">View Results API</a>';
+		$urlTpl .= '</div>';
+
+		// Export Data Button
+		$urlTpl .= '<div class="mx-2">';
+		$urlTpl .= '<a class="btn btn-secondary" href="?export=' . $_GET['rq'] . '" role="button">Export Data</a>';
+		$urlTpl .= '</div>';
+
+		// Clear Log Button
+		$urlTpl .= '<div class="mx-2">';
+		$urlTpl .= '<a class="btn btn-warning" href="index.php?rq=' . $_GET['rq'] . '&clear" role="button">Clear Log</a>';
+		$urlTpl .= '</div>';
+		
 		$urlTpl .= '</div>';
 
 		// Are we inspecting the logs
 		if(isset($_GET['inspect'])) {
 			// No data yet
 			if(empty($current)) {
-				// No data, show the Url
+				// No data, show the URL
 				$getTpl = file_get_contents("req.tpl.html");
 				$getTpl = str_replace("REQ_URL", $urlTpl, $getTpl);
 				$getTpl = str_replace("CURRENT_HERE", "", $getTpl);
+				$getTpl = str_replace("TEMPLATE_TITLE_CONTENT", "🔎 " . $_GET['rq'], $getTpl);
 				echo $getTpl;
 			}else{
 				// There is data, load the content
 				$getTpl = file_get_contents("req.tpl.html");
 				$getTpl = str_replace("REQ_URL", $urlTpl, $getTpl);
 				$getTpl = str_replace("CURRENT_HERE", $current, $getTpl);
+				$getTpl = str_replace("TEMPLATE_TITLE_CONTENT", "🔎 " . $_GET['rq'], $getTpl);
 				echo $getTpl;
 			}
 		// Clearing the file
@@ -149,11 +191,12 @@
 		// Requesting
 		}else{
 			$postdata = file_get_contents("php://input");
+			$nl = "\n";
 
 			// Header
 			$newlog = '<br /><div class="card"><h5 class="card-header">';
 			$newlog .= $_SERVER["REQUEST_METHOD"] . ' ' . $_SERVER['REQUEST_URI'] . '<span class="float-right">' . date('Y-m-d H:i:s') . '</span>';
-			$newlog .= '</h5>';
+			$newlog .= '</h5>' . $nl;
 
 			// Body
 			$newlog .= '<div class="card-body">';
@@ -163,34 +206,42 @@
 			//$newlog .= "IP: ".$_SERVER['REMOTE_ADDR'] . "<br />";
 
 			// Headers
-			$newlog .= '<h5>Headers</h5>';
+			$newlog .= '<h5>Headers</h5>' . $nl;
 			foreach (getallheaders() as $name => $value) {
-				$newlog .= "<b>$name</b>: $value<br />";
+				$newlog .= "<b>$name</b>: $value<br />" . $nl;
 			}
 			$newlog .= '</div>';
 
 			// Body
 			$newlog .= '<div class="col-md-6">';
-			$newlog .= '<h5>Body</h5>';
-			$newlog .= "<pre>" . htmlspecialchars($postdata) . "</pre>";
+			$newlog .= '<h5>Body</h5>' . $nl;
+			$newlog .= "<pre>" . htmlspecialchars($postdata) . "</pre>" . $nl . $nl;
 			$newlog .= "</div></div>";
 			$newlog .= "</div></div>";
 			$current = $newlog . $current;
-			$current = keepLines($current, 700);
+			$current = keepLines($current, 100000);
 
 			// Put the request into the file
 			file_put_contents($file, $current);
+
+			// Write body content into separate log file
+			if ($postdata) {
+				file_put_contents($file_body, $postdata);
+			}
 
 			// Return a 200
 			exit(http_response_code(200));
 		}
 	}else{
+		// Generate Home Page
+
 		// Show the generate button if there is no current url
-		$genLink = '<br /><a class="btn btn-info" href="index.php?rq=' . $genToken . '&inspect" role="button">Generate Url</a>';
+		$genLink = '<br /><a class="btn btn-info" href="index.php?rq=' . $genToken . '&inspect" role="button">Generate URL</a>';
 
 		$getTpl = file_get_contents("req.tpl.html");
 		$getTpl = str_replace("REQ_URL", "", $getTpl);
 		$getTpl = str_replace("CURRENT_HERE", $genLink, $getTpl);
+		$getTpl = str_replace("TEMPLATE_TITLE_CONTENT", "Home", $getTpl);
 		echo $getTpl;
 	}
 
