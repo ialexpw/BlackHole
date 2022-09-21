@@ -158,6 +158,8 @@
 		$urlTpl .= '<div class="mx-2">';
 		$urlTpl .= '<a class="btn btn-warning" href="index.php?rq=' . $_GET['rq'] . '&clear" role="button">Clear Log</a>';
 		$urlTpl .= '</div>';
+
+		$urlTpl .= '<p><strong>Page Loaded: </strong>' . date('Y-m-d H:i:s') . '</p>';
 		
 		$urlTpl .= '</div>';
 
@@ -195,7 +197,7 @@
 
 			// Header
 			$newlog = '<br /><div class="card"><h5 class="card-header">';
-			$newlog .= $_SERVER["REQUEST_METHOD"] . ' ' . $_SERVER['REQUEST_URI'] . '<span class="float-right">' . date('Y-m-d H:i:s') . '</span>';
+			$newlog .= $_SERVER["REQUEST_METHOD"] . ' ' . $_SERVER['REQUEST_URI'] . "\n" . '<span class="float-right"><small>Date Time: </small>' . date('Y-m-d H:i:s') . '</span>';
 			$newlog .= '</h5>' . $nl;
 
 			// Body
