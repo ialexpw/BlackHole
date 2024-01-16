@@ -21,9 +21,9 @@ BlackHole is lightweight and can be setup within minutes, the only requirements 
 - [x] An API to view details about bins/holes
 - [x] An API to allow you to create bins/holes
 - [x] Ability to export data that is within a bin/hole
-- [ ] Make it easier to change the HTML template if needed
+- [x] Make it easier to change the HTML template if needed
 
 ## API Endpoints
 * View Details (no HTML): `/index.php?api&details=<code>` (linked from results page)
-* View Details (with HTML): `/index.php?api&details=<code>&raw`
+* View Details (with HTML tags): `/index.php?api&details=<code>&raw`
 * Create New Bin: `/index.php?api&create`
