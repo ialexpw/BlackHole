@@ -162,7 +162,7 @@
 				// No data, show the URL
 				$getTpl = file_get_contents("req.tpl.html");
 				$getTpl = str_replace("REQ_URL", $urlTpl, $getTpl);
-				$getTpl = str_replace("CURRENT_HERE", "No data available yet.", $getTpl);
+				$getTpl = str_replace("CURRENT_HERE", "<br />No data available yet.", $getTpl);
 				$getTpl = str_replace("TEMPLATE_TITLE_CONTENT", "Request: " . $_GET['rq'], $getTpl);
 				$getTpl = str_replace("FOOTER", $footer, $getTpl);
 				echo $getTpl;
