@@ -150,11 +150,10 @@
 		// Clear Log Button
 		$urlTpl .= '<a class="btn btn-outline-danger" href="index.php?rq=' . $_GET['rq'] . '&clear" role="button">Clear Log</a>';
 		$urlTpl .= '</div>';
-
-		// Page load time
-		$urlTpl .= '<p><strong>Page Loaded: </strong>' . date('Y-m-d H:i:s') . '</p>';
-		
 		$urlTpl .= '</div>';
+
+		// Page load time - footer
+		$footer = '<p><strong>Page Loaded: </strong>' . date('Y-m-d H:i:s') . '</p>';
 
 		// Are we inspecting the logs
 		if(isset($_GET['inspect'])) {
@@ -163,15 +162,17 @@
 				// No data, show the URL
 				$getTpl = file_get_contents("req.tpl.html");
 				$getTpl = str_replace("REQ_URL", $urlTpl, $getTpl);
-				$getTpl = str_replace("CURRENT_HERE", "", $getTpl);
-				$getTpl = str_replace("TEMPLATE_TITLE_CONTENT", "🔎 " . $_GET['rq'], $getTpl);
+				$getTpl = str_replace("CURRENT_HERE", "No data available yet.", $getTpl);
+				$getTpl = str_replace("TEMPLATE_TITLE_CONTENT", "Request: " . $_GET['rq'], $getTpl);
+				$getTpl = str_replace("FOOTER", $footer, $getTpl);
 				echo $getTpl;
 			}else{
 				// There is data, load the content
 				$getTpl = file_get_contents("req.tpl.html");
 				$getTpl = str_replace("REQ_URL", $urlTpl, $getTpl);
 				$getTpl = str_replace("CURRENT_HERE", $current, $getTpl);
-				$getTpl = str_replace("TEMPLATE_TITLE_CONTENT", "🔎 " . $_GET['rq'], $getTpl);
+				$getTpl = str_replace("TEMPLATE_TITLE_CONTENT", "Request: " . $_GET['rq'], $getTpl);
+				$getTpl = str_replace("FOOTER", $footer, $getTpl);
 				echo $getTpl;
 			}
 		// Clearing the file
