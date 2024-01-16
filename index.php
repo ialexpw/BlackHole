@@ -7,7 +7,7 @@
 	 * @package    BlackHole
 	 * @author     Alex White
 	 * @copyright  2024 BlackHole
-	 * @link       https://m0x.org
+	 * @link       https://github.com/ialexpw/BlackHole
 	 */
 
 	// Set the log output folder
@@ -153,7 +153,7 @@
 		$urlTpl .= '</div>';
 
 		// Page load time - footer
-		$footer = '<p><strong>Page Loaded: </strong>' . date('Y-m-d H:i:s') . '</p>';
+		$footer = '<p>Powered by <a href="https://github.com/ialexpw/BlackHole">BlackHole</a> - <strong>Page Loaded: </strong>' . date('Y-m-d H:i:s') . '</p>';
 
 		// Are we inspecting the logs
 		if(isset($_GET['inspect'])) {
