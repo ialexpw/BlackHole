@@ -191,15 +191,13 @@
 
 			// Header
 			$newlog = '<br /><div class="card"><h5 class="card-header">';
-			$newlog .= $_SERVER["REQUEST_METHOD"] . ' ' . $_SERVER['REQUEST_URI'] . "\n" . '<span style="text-align:right;">' . date('Y-m-d H:i:s') . '</span>';
+			$newlog .= $_SERVER["REQUEST_METHOD"] . ' ' . $_SERVER['REQUEST_URI'] . "\n" . ' <span>(' . date('Y-m-d H:i:s') . ')</span>';
 			$newlog .= '</h5>' . $nl;
 
 			// Body
 			$newlog .= '<div class="card-body">';
 			$newlog .= '<div class="row">';
 			$newlog .= '<div class="col-md-6">';
-    
-			//$newlog .= "IP: ".$_SERVER['REMOTE_ADDR'] . "<br />";
 
 			// Headers
 			$newlog .= '<h5>Headers</h5>' . $nl;
@@ -211,7 +209,14 @@
 			// Body
 			$newlog .= '<div class="col-md-6">';
 			$newlog .= '<h5>Body</h5>' . $nl;
-			$newlog .= "<pre>" . htmlspecialchars($postdata) . "</pre>" . $nl . $nl;
+
+			// Check for empty body
+			if(empty($postdata)) {
+				$newlog .= "Empty body";
+			}else{
+				$newlog .= "<pre>" . htmlspecialchars($postdata) . "</pre>" . $nl . $nl;
+			}
+
 			$newlog .= "</div></div>";
 			$newlog .= "</div></div>";
 			$current = $newlog . $current;
