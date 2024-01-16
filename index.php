@@ -133,7 +133,7 @@
 		// Refresh Rate
 		$urlTpl .= '<div class="col-2">';
 		$urlTpl .= '<div class="input-group mb-3">';
-		$urlTpl .= '<span class="input-group-text" id="autoRefresh">🔃</span>';
+		$urlTpl .= '<span class="input-group-text" id="autoRefresh"><i class="bi bi-arrow-clockwise"></i></span>';
 		$urlTpl .= '<select class="form-control"  id="selectX" onchange="getSelectValue(\'selectX\');">';
 		$urlTpl .= '<option>0 - Disable</option> <option>2 seconds</option> <option>10 seconds</option> <option>20 seconds</option> <option>60 seconds</option> <option>120 seconds</option>';
 		$urlTpl .= '</select>';
