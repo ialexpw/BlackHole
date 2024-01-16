@@ -191,7 +191,7 @@
 
 			// Header
 			$newlog = '<br /><div class="card"><h5 class="card-header">';
-			$newlog .= $_SERVER["REQUEST_METHOD"] . ' ' . $_SERVER['REQUEST_URI'] . "\n" . '<span class="float-right"><small>Date Time: </small>' . date('Y-m-d H:i:s') . '</span>';
+			$newlog .= $_SERVER["REQUEST_METHOD"] . ' ' . $_SERVER['REQUEST_URI'] . "\n" . '<span style="text-align:right;">' . date('Y-m-d H:i:s') . '</span>';
 			$newlog .= '</h5>' . $nl;
 
 			// Body
