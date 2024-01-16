@@ -6,7 +6,7 @@
 	 *
 	 * @package    BlackHole
 	 * @author     Alex White
-	 * @copyright  2020 BlackHole
+	 * @copyright  2024 BlackHole
 	 * @link       https://m0x.org
 	 */
 
@@ -118,26 +118,22 @@
 		$urlTpl = '<div class="row">';
 
 		// Home Button
-		$urlTpl .= '<div class="mx-2">';
-		$urlTpl .= '<a class="btn btn-success" href="/" role="button">Home</a>';
+		$urlTpl .= '<div class="col-1">';
+		$urlTpl .= '<a class="btn btn-outline-success" href="index.php" role="button">Home</a>';
 		$urlTpl .= '</div>';
 
 		// Request URL Button/Field section
-		$urlTpl .= '<div class="mx-2">';
+		$urlTpl .= '<div class="col-5">';
 		$urlTpl .= '<div class="input-group mb-3">';
-		$urlTpl .= '<div class="input-group-prepend">';
-		$urlTpl .= '<span class="input-group-text" id="inputGroup-sizing-default">Req. URL</span>';
-		$urlTpl .= '</div>';
-		$urlTpl .= '<input type="text" class="form-control" onFocus="this.select();" value="' . $reqUrl . '" style="background-color: #fff;" readonly>';
+		$urlTpl .= '<span class="input-group-text" id="reqUrl">Req. URL</span>';
+		$urlTpl .= '<input type="text" class="form-control" onFocus="this.select();" value="' . $reqUrl . '" style="background-color: #fff;" aria-label="Request URL" readonly>';
 		$urlTpl .= '</div>';
 		$urlTpl .= '</div>';
 
 		// Refresh Rate
-		$urlTpl .= '<div class="mx-2">';
+		$urlTpl .= '<div class="col-2">';
 		$urlTpl .= '<div class="input-group mb-3">';
-		$urlTpl .= '<div class="input-group-prepend">';
-		$urlTpl .= '<span class="input-group-text" id="inputGroup-sizing-default">🔃</span>';
-		$urlTpl .= '</div>';
+		$urlTpl .= '<span class="input-group-text" id="autoRefresh">🔃</span>';
 		$urlTpl .= '<select class="form-control"  id="selectX" onchange="getSelectValue(\'selectX\');">';
 		$urlTpl .= '<option>0 - Disable</option> <option>2 seconds</option> <option>10 seconds</option> <option>20 seconds</option> <option>60 seconds</option> <option>120 seconds</option>';
 		$urlTpl .= '</select>';
@@ -145,20 +141,17 @@
 		$urlTpl .= '</div>';
 
 		// View API
-		$urlTpl .= '<div class="mx-2">';
-		$urlTpl .= '<a class="btn btn-secondary" href="index.php?api&details=' . $_GET['rq'] . '" role="button" target="_blank" title="View Results API">View Results API</a>';
-		$urlTpl .= '</div>';
+		$urlTpl .= '<div class="col-4">';
+		$urlTpl .= '<a class="btn btn-outline-primary" href="index.php?api&details=' . $_GET['rq'] . '" role="button" target="_blank" title="View Results API">View Results API</a> ';
 
 		// Export Data Button
-		$urlTpl .= '<div class="mx-2">';
-		$urlTpl .= '<a class="btn btn-secondary" href="?export=' . $_GET['rq'] . '" role="button">Export Data</a>';
-		$urlTpl .= '</div>';
+		$urlTpl .= '<a class="btn btn-outline-primary" href="?export=' . $_GET['rq'] . '" role="button">Export Data</a> ';
 
 		// Clear Log Button
-		$urlTpl .= '<div class="mx-2">';
-		$urlTpl .= '<a class="btn btn-warning" href="index.php?rq=' . $_GET['rq'] . '&clear" role="button">Clear Log</a>';
+		$urlTpl .= '<a class="btn btn-outline-danger" href="index.php?rq=' . $_GET['rq'] . '&clear" role="button">Clear Log</a>';
 		$urlTpl .= '</div>';
 
+		// Page load time
 		$urlTpl .= '<p><strong>Page Loaded: </strong>' . date('Y-m-d H:i:s') . '</p>';
 		
 		$urlTpl .= '</div>';
@@ -238,7 +231,7 @@
 		// Generate Home Page
 
 		// Show the generate button if there is no current url
-		$genLink = '<br /><a class="btn btn-info" href="index.php?rq=' . $genToken . '&inspect" role="button">Generate URL</a>';
+		$genLink = '<br /><a class="btn btn-outline-primary" href="index.php?rq=' . $genToken . '&inspect" role="button">Generate URL</a>';
 
 		$getTpl = file_get_contents("req.tpl.html");
 		$getTpl = str_replace("REQ_URL", "", $getTpl);
