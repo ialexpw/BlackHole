@@ -238,6 +238,7 @@
 		$getTpl = str_replace("REQ_URL", "", $getTpl);
 		$getTpl = str_replace("CURRENT_HERE", $genLink, $getTpl);
 		$getTpl = str_replace("TEMPLATE_TITLE_CONTENT", "Home", $getTpl);
+		$getTpl = str_replace("FOOTER", "", $getTpl);
 		echo $getTpl;
 	}
 
