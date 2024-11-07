@@ -14,7 +14,8 @@ BlackHole is lightweight and can be setup within minutes, the only requirements 
 1. Refresh the page to see information about the requests
 
 ## Screenshot
-![image](https://user-images.githubusercontent.com/7994724/183115278-518653c4-5336-4c24-853e-95dab4b6321d.png)
+![image](https://github.com/user-attachments/assets/d5c3fdf0-52b6-42ff-b6b9-8b990a59bbde)
+
 
 ## API Endpoints
 * View Details (no HTML): `/index.php?api&details=<code>` (linked from results page)
